@@ -68,9 +68,9 @@
 
         var info; 
         cityName=$("#city-name").val().toUpperCase();
-        var webapp = "/rest/city"+cityName;
+        var webapp = "http://176.112.202.53:57772/rest/city"+cityName;
           $.ajax({ 
-              url:"work.json", 
+              url:webapp, 
               type:'GET',
               dataType:"json",
               
@@ -122,4 +122,8 @@
 <p class="wow"> Made with <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> From Russia & India. </p>
  </div>
 </body>
-  </html>
+</html>
+
+
+
+
