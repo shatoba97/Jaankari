@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Place1</title>
+    <link rel="stylesheet" href="../shared/css/base.css" />
+    <link rel="stylesheet" href="transition.css" />
+  </head>
+  <body>
+    <h1>Place1</h1>
+    <h4>A little bit about pictures</h4>
+    <p>Information about place</p>
+    
+    <script src="../../build/react-with-addons.js"></script>
+    <script src="../../build/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.min.js"></script>
+    <script type="text/babel">
+      var CSSTransitionGroup = React.addons.CSSTransitionGroup;
+      var INTERVAL = 3000;
+
+      var AnimateDemo = React.createClass({
+        getInitialState: function() {
+          return {current: 0};
+        },
+
+        componentDidMount: function() {
+          this.interval = setInterval(this.tick, INTERVAL);
+        },
+
+        componentWillUnmount: function() {
+          clearInterval(this.interval);
+        },
+
+        tick: function() {
+          this.setState({current: this.state.current + 1});
+        },
+
+        render: function() {
+          var children = [];
+          var pos = 0;
+          var colors = ['white'];
+          for (var i = this.state.current; i <  + colors.length; i++) {
+            var style = {
+              left: pos * 128,
+              background: colors[i % colors.length]
+            };
+            pos++;
+            children.push(<div key={i} className="animateItem" style={style}>{i}</div>);
+          }
+          return (
+            <CSSTransitionGroup
+              className="animateExample"
+              transitionEnterTimeout={250}
+              transitionLeaveTimeout={250}
+              transitionName="example">
+              {children}
+            </CSSTransitionGroup>
+          );
+        }
+      });
+
+      ReactDOM.render(
+        <AnimateDemo />,
+        document.getElementById('container')
+      );
+    </script>
+  </body>
+</html>
